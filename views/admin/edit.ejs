@@ -1,0 +1,16 @@
+<% layout('/layouts/boilerplate') %>
+    <form action="/admin/list/<%= data.id %>?_method=PATCH" method="post">
+        <div>
+            <label for="title"></label>Title: <br> 
+            <input type="text" name="title"
+            id="title" placeholder="title" value= "<%= data.title %>">
+        </div>
+        <div>
+            <label for="description"></label>Description: <br>
+            <textarea id ="description" placeholder="description"
+            name="description" id="" cols="30" rows="10">
+            <%= data.description %>
+            </textarea>
+        </div>
+        <button>EDIT</button>
+    </form>

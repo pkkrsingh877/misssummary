@@ -1,0 +1,14 @@
+<% layout('/layouts/boilerplate') %>
+    <form action="/admin" method="post">
+        <div>
+            <label for="title"></label>Title: <br> 
+            <input type="text" name="title"
+            id="title" placeholder="title">
+        </div>
+        <div>
+            <label for="description"></label>Description: <br>
+            <textarea id ="description" placeholder="description"
+            name="description" id="" cols="30" rows="10"></textarea>
+        </div>
+        <button>POST</button>
+    </form>

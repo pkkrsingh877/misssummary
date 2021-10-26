@@ -1,0 +1,15 @@
+<% layout('/layouts/boilerplate') %>
+    <h1>
+        <a href="/admin">Back to admin portal</a>
+    </h1>
+    <% for(let i = 0; i < data.length; i++){ %>
+        <section>
+            <h2>
+                <%= data[i].title %>
+            </h2>
+            <a href="/admin/list/edit/<%= data[i].id %>" class="btn btn-info button">Edit</a>
+            <form action="/admin/list/<%= data[i].id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger button">DELETE</button>
+            </form>
+        </section>
+    <% } %>  
