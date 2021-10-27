@@ -31,6 +31,18 @@ const summarySchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    category: {
+        type: String
+    },
+    tags: {
+        type: String
+    },
+    creationDate: {
+        type: Date
+    },
+    modificationDate: {
+        type: Date
     }
 });
 //create model
