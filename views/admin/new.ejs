@@ -1,14 +1,17 @@
 <% layout('/layouts/boilerplate') %>
+    <h2>Add New Summary</h2>
     <form action="/admin" method="post">
-        <div>
-            <label for="title"></label>Title: <br> 
+        <div class="mb-3">
+            <label for="title" class="form-label">
+            Title:
+            </label> <br> 
             <input type="text" name="title"
-            id="title" placeholder="title">
+            id="title" placeholder="title" class="form-control">
         </div>
-        <div>
-            <label for="description"></label>Description: <br>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description: </label><br>
             <textarea id ="description" placeholder="description"
-            name="description" id="" cols="30" rows="10"></textarea>
+            name="description" id="" cols="30" rows="10" class="form-control"></textarea>
         </div>
-        <button>POST</button>
+        <button class="btn btn-success">POST</button>
     </form>

@@ -1,6 +1,6 @@
 <% layout('/layouts/boilerplate') %>
     <h1>
-        <a href="/admin">Back to admin portal</a>
+        <a href="/admin">Back</a>
     </h1>
     <% for(let i = 0; i < data.length; i++){ %>
         <section>
@@ -8,7 +8,7 @@
                 <%= data[i].title %>
             </h2>
             <a href="/admin/list/edit/<%= data[i].id %>" class="btn btn-info button">Edit</a>
-            <form action="/admin/list/<%= data[i].id %>?_method=DELETE" method="POST">
+            <form class = "d-inline" action="/admin/list/<%= data[i].id %>?_method=DELETE" method="POST">
             <button class="btn btn-danger button">DELETE</button>
             </form>
         </section>

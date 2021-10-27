@@ -6,9 +6,10 @@ const port = process.env.PORT || 3000;
 const methodOverride = require('method-override')
 const morgan = require('morgan');
 const ejsMate = require('ejs-mate');
+require('dotenv').config();
 
 //setting up mongodb
-mongoose.connect('mongodb://localhost:27017/english',
+mongoose.connect(process.env.MONGO_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
