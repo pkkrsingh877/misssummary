@@ -95,15 +95,14 @@ app.get('/admin/list', async (req, res) => {
     res.render('admin/list', { data });
 });
 
-app.post('/admin', (req, res) => {
+app.post('/admin', async (req, res) => {
     const { title, description } = req.body;
-    const data = Summary.create({
+    await Summary.create({
         title: title, 
         description: description, 
         createdAt: new Date(), 
         modifiedAt: new Date()
     });
-    console.log(data);
     res.redirect('admin')
 });
 
@@ -143,13 +142,6 @@ app.listen(port, () => {
 });
 
 //functions
-
-const create = async (title, description) => {
-    await Summary.create({ 
-        title: title,
-        description: description 
-    });
-}
 
 const findAll = async () => {
     const doc = await Summary.find({});

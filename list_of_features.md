@@ -4,11 +4,12 @@
 
 1. The Category feature, unique categories
 2. The Tag feature, many tags
-3. The read minutes sfeature, Algo to find read minutes:
+3. The read minutes feature, Algo to find read minutes:
    a. Find the number of words in the post
    b. Divide it by 200
    c. Ceil it by 1
    d. You get your output
+4. View Count for all blogs
 
 ## Features That Have Been Added
 
