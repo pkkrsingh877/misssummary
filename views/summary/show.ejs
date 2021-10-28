@@ -11,8 +11,8 @@
             <span class="bi bi-person icon"> Prabhat Kumar</span>
             <span class="bi bi-tag icon"> Tags</span>
             <span class="bi bi-ui-checks-grid icon"> Category</span>
-            <span class="bi bi-clock icon"> Time</span>
-            <span class="bi bi-calendar icon"> Date</span>
+            <span class="bi bi-clock icon"> <%= data.modifiedAt.toLocaleString() %></span>
+            <span class="bi bi-calendar icon"> <%= data.createdAt.toLocaleString() %></span>
             <span class="bi bi-book icon"> Read Minute</span>
         </div>
     </section>

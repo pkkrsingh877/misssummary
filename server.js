@@ -32,16 +32,17 @@ const summarySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
-        type: String
-    },
-    tags: {
-        type: String
-    },
-    creationDate: {
+    // category: {
+    //     type: String
+    // },
+    // tags: [String],
+    // readMinutes: {
+    //     type: Number
+    // },
+    createdAt: {
         type: Date
     },
-    modificationDate: {
+    modifiedAt: {
         type: Date
     }
 });
@@ -66,7 +67,8 @@ app.patch('/admin/list/:id', async (req, res) => {
     const { id } = req.params;
     const data = await Summary.findByIdAndUpdate(id, {
         title: newTitle,
-        description: newDescription
+        description: newDescription,
+        modifiedAt: new Date()
     },
     {
         new: true,
@@ -95,7 +97,13 @@ app.get('/admin/list', async (req, res) => {
 
 app.post('/admin', (req, res) => {
     const { title, description } = req.body;
-    create(title, description);
+    const data = Summary.create({
+        title: title, 
+        description: description, 
+        createdAt: new Date(), 
+        modifiedAt: new Date()
+    });
+    console.log(data);
     res.redirect('admin')
 });
 
