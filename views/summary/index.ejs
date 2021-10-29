@@ -16,7 +16,7 @@
                 <span class="bi bi-ui-checks-grid icon"> Category</span>
                 <span class="bi bi-clock icon"> <%= data[i].modifiedAt.toLocaleString() %></span>
                 <span class="bi bi-calendar icon"> <%= data[i].createdAt.toLocaleString() %></span>
-                <span class="bi bi-book icon"> Read Minute</span>
+                <span class="bi bi-book icon"> <%= data[i].readMinutes %> Minutes</span>
             </div>
         </section>
     <% } %>

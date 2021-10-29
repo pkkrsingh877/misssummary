@@ -36,9 +36,7 @@ const summarySchema = new mongoose.Schema({
     //     type: String
     // },
     // tags: [String],
-    // readMinutes: {
-    //     type: Number
-    // },
+    readMinutes: Number,
     createdAt: {
         type: Date
     },
@@ -64,11 +62,13 @@ app.patch('/admin/list/:id', async (req, res) => {
     const { title, description } = req.body;
     let newTitle = title;
     let newDescription = description;
+    let minutes = readMinutes(newDescription);
     const { id } = req.params;
     const data = await Summary.findByIdAndUpdate(id, {
         title: newTitle,
         description: newDescription,
-        modifiedAt: new Date()
+        modifiedAt: new Date(),
+        readMinutes: minutes
     },
     {
         new: true,
@@ -97,11 +97,13 @@ app.get('/admin/list', async (req, res) => {
 
 app.post('/admin', async (req, res) => {
     const { title, description } = req.body;
+    let minutes = readMinutes(description);
     await Summary.create({
         title: title, 
         description: description, 
         createdAt: new Date(), 
-        modifiedAt: new Date()
+        modifiedAt: new Date(),
+        readMinutes: minutes
     });
     res.redirect('admin')
 });
@@ -148,3 +150,14 @@ const findAll = async () => {
     return doc;
 }
 
+const readMinutes = (str) => {
+    //counting number of words in description
+    let count = 1
+    for(let i=0; i< str.length; i++){
+        if(str[i] === " "){
+            count++;
+        }
+    }
+    let minutes = Math.ceil(count/180);
+    return minutes;
+}
