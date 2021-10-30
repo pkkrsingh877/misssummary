@@ -124,6 +124,15 @@ app.get('/summary/:id', async (req, res) => {
 
 app.get('/summary', async (req, res) => {
     const data = await findAll();
+    console.log(data)
+    /* Since it's a get request i'm making the 
+    description in database should not change 
+    */ 
+    for(let i = 0; i < data.length; i++){
+        let newStr = getNewDescription(data[i].description);
+        data[i].description = newStr;
+    }
+    console.log(data);
     res.render('summary/index', { data });
 });
 
@@ -160,4 +169,19 @@ const readMinutes = (str) => {
     }
     let minutes = Math.ceil(count/180);
     return minutes;
+}
+
+const getNewDescription = (str) => {
+    //counting number of words in description
+    let count = 1
+    let j = 0;
+    for(let i=0; i< str.length; i++){
+        if(str[i] === " "){
+            count++; 
+            if(count === 46){
+              j = i;
+            }
+        }
+    }
+    return str.slice(0, j);
 }
