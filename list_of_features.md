@@ -5,7 +5,7 @@
 1. The Category feature, unique categories
 2. The Tag feature, many tags
 3. View Count for all blogs
-
+4. Create WYSIWYG editor in edit and new so it's easier to create nice customisable posts.
 
 ## Features That Have Been Added
 

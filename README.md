@@ -1,3 +1,6 @@
 # Misssummary - Get Summary of Proses, Poems and Dramas
 
-Building this project to get real experience of building a full stack website and get better at it.
+## Link to the website goes here:
+[English Summary](https://misssummary.prabhatkumar123.repl.co/ "English Summary")
+
+
