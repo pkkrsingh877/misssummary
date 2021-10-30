@@ -5,7 +5,7 @@
 1. The Category feature, unique categories
 2. The Tag feature, many tags
 3. View Count for all blogs
-4. Count words and hide them if their numbers are greater than 50. Just show those words in the show page.
+
 
 ## Features That Have Been Added
 
@@ -18,3 +18,4 @@
    b. Divide it by 180
    c. Ceil it by 1
    d. You get your output
+6. Count words and hide them if their numbers are greater than 45. Just show those words in the show page.   
