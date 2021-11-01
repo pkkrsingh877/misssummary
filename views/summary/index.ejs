@@ -7,8 +7,9 @@
                 </a>
             </h2>
             <hr>
-            <article class="description">
-                <%= data[i].description %> <a href="summary/<%= data[i]._id %>"">[Read More...]</a>
+            <article class="description m-3">
+                <%- data[i].description %>
+                 <a href="summary/<%= data[i]._id %>">[Read More...]</a>
             </article>
             <div class="icons">
                 <span class="bi bi-person icon"> Prabhat Kumar</span>
@@ -20,4 +21,3 @@
             </div>
         </section>
     <% } %>
-
