@@ -7,9 +7,15 @@
         <article class="description m-3">
             <%- data.description %>
         </article>
+        <article class="tags m-3 d-flex flex-row flex-wrap">
+            <% for(let i = 0; i < data.tags.length; i++){ %>
+            <div class="card shadow p-3 mb-3 mt-3 bg-body rounded">
+                <a href="/summary/tags/<%= data.tags[i] %>"> <%= data.tags[i] %> </a>
+            </div>
+            <% } %>
+        </article>
         <div class="icons">
             <span class="bi bi-person icon"> Prabhat Kumar</span>
-            <span class="bi bi-tag icon"> Tags</span>
             <span class="bi bi-ui-checks-grid icon"> Category</span>
             <span class="bi bi-clock icon"> <%= data.modifiedAt.toLocaleString() %></span>
             <span class="bi bi-calendar icon"> <%= data.createdAt.toLocaleString() %></span>

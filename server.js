@@ -47,6 +47,7 @@ const summarySchema = new mongoose.Schema({
 //create model
 const Summary = new mongoose.model('Summary', summarySchema);
 
+
 //setting up ejs
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -59,15 +60,17 @@ app.use(morgan('dev'));
 
 //routes
 app.patch('/admin/list/:id', async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, tags } = req.body;
     let newTitle = title;
     let newDescription = description;
+    let prepareTags = prepareSomeTags(tags);
     let minutes = readMinutes(newDescription);
     const { id } = req.params;
     const data = await Summary.findByIdAndUpdate(id, {
         title: newTitle,
         description: newDescription,
         modifiedAt: new Date(),
+        tags: prepareTags,
         readMinutes: minutes
     },
     {
@@ -96,14 +99,16 @@ app.get('/admin/list', async (req, res) => {
 });
 
 app.post('/admin', async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, tags } = req.body;
+    let prepareTags = prepareSomeTags(tags);
     let minutes = readMinutes(description);
     await Summary.create({
         title: title, 
         description: description, 
         createdAt: new Date(), 
         modifiedAt: new Date(),
-        readMinutes: minutes
+        readMinutes: minutes,
+        tags: prepareTags
     });
     res.redirect('admin')
 });
@@ -121,6 +126,16 @@ app.get('/summary/:id', async (req, res) => {
     const data = await Summary.findById(id);
     res.render('summary/show', { data });
 });
+
+app.get('/summary/tags/:tag', async (req, res) => {
+    const { tag } = req.params;
+    const data = await Summary.find({ tags: tag });
+    for(let i = 0; i < data.length; i++){
+        let newStr = getNewDescription(data[i].description);
+        data[i].description = newStr;
+    }
+    res.render('summary/tag', { data , tag });
+})
 
 app.get('/summary', async (req, res) => {
     const data = await findAll();
@@ -203,3 +218,19 @@ const countHtmlTags = (str) => {
     }
     return arr.length;
 } 
+
+const prepareSomeTags = (str) => {
+    console.log(str);
+    let arr = [];
+    for(let i = 0; i < str.length; i++){
+        let j = i;
+        var temp = "";
+        while(str[j] != ',' && j < str.length){
+            temp = temp + str[j];
+            j++;
+        }
+        arr.push(temp.trim());
+        i = j++;
+    }
+    return arr;
+}
