@@ -124,7 +124,6 @@ app.get('/summary/:id', async (req, res) => {
 
 app.get('/summary', async (req, res) => {
     const data = await findAll();
-    console.log(data)
     /* Since it's a get request i'm making the 
     description in database should not change 
     */ 
@@ -132,7 +131,6 @@ app.get('/summary', async (req, res) => {
         let newStr = getNewDescription(data[i].description);
         data[i].description = newStr;
     }
-    console.log(data);
     res.render('summary/index', { data });
 });
 
