@@ -35,7 +35,7 @@ const summarySchema = new mongoose.Schema({
     // category: {
     //     type: String
     // },
-    // tags: [String],
+    tags: [String],
     readMinutes: Number,
     createdAt: {
         type: Date
