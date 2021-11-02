@@ -60,24 +60,26 @@ app.use(morgan('dev'));
 
 //routes
 app.patch('/admin/list/:id', async (req, res) => {
-    const { title, description, tags } = req.body;
-    let newTitle = title;
-    let newDescription = description;
-    let prepareTags = prepareSomeTags(tags);
-    let minutes = readMinutes(newDescription);
-    const { id } = req.params;
-    const data = await Summary.findByIdAndUpdate(id, {
-        title: newTitle,
-        description: newDescription,
-        modifiedAt: new Date(),
-        tags: prepareTags,
-        readMinutes: minutes
-    },
-    {
-        new: true,
-        upsert: true
-    }
-    );
+    const { title, description, tags, password } = req.body;
+    if(password === process.env.PASSWORD){
+        let newTitle = title;
+        let newDescription = description;
+        let prepareTags = prepareSomeTags(tags);
+        let minutes = readMinutes(newDescription);
+        const { id } = req.params;
+        const data = await Summary.findByIdAndUpdate(id, {
+            title: newTitle,
+            description: newDescription,
+            modifiedAt: new Date(),
+            tags: prepareTags,
+            readMinutes: minutes
+        },
+        {
+            new: true,
+            upsert: true
+        }
+        );
+    }    
     res.redirect('/admin/list');
 });
 
@@ -99,17 +101,19 @@ app.get('/admin/list', async (req, res) => {
 });
 
 app.post('/admin', async (req, res) => {
-    const { title, description, tags } = req.body;
-    let prepareTags = prepareSomeTags(tags);
-    let minutes = readMinutes(description);
-    await Summary.create({
-        title: title, 
-        description: description, 
-        createdAt: new Date(), 
-        modifiedAt: new Date(),
-        readMinutes: minutes,
-        tags: prepareTags
-    });
+    const { title, description, tags, password } = req.body;
+    if(password === process.env.PASSWORD){
+        let prepareTags = prepareSomeTags(tags);
+        let minutes = readMinutes(description);
+        await Summary.create({
+            title: title, 
+            description: description, 
+            createdAt: new Date(), 
+            modifiedAt: new Date(),
+            readMinutes: minutes,
+            tags: prepareTags
+        });
+    }
     res.redirect('admin')
 });
 

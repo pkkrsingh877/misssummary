@@ -5,6 +5,7 @@
 1. The Category feature, unique categories
 2. View Count for all blogs
 3. Pagination
+4. Error Handling
 
 ## Features That Have Been Added
 
@@ -21,3 +22,4 @@
 7. The Description is in html format which is rendered directly in our card
 8. Count the number of html elements in the description and add that to number of words that can be shown on the summary page, not functional
 9. The Tag feature, many tags
+10. Now password is needed to make some sort of post or patch request
