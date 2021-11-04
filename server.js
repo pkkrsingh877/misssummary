@@ -136,8 +136,7 @@ app.post('/summary/:id', async (req, res) => {
     const { name, email, comment } = req.body;
     const data = await Summary.findByIdAndUpdate(id, {
         $push: { comments: [{name, email, comment }]}
-      }, { new: true, upsert: true});
-    console.log(data.comments);  
+      }, { new: true, upsert: true}); 
     res.redirect(`/summary/${id}`);  
 });
 

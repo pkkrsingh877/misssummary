@@ -22,4 +22,5 @@
 7. The Description is in html format which is rendered directly in our card
 8. Count the number of html elements in the description and add that to number of words that can be shown on the summary page, not functional
 9. The Tag feature, many tags
-10. Now password is needed to make some sort of post or patch request
+10. Now, password is needed to make some sort of post or patch request
+11. Now, Visitors can comment on the each summary 

@@ -24,6 +24,26 @@
     </section>
     <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
         <h2>
+            Comments:
+        </h2>
+        <% for(let i = (data.comments.length - 1); i >= 0; i--){ %>
+            <article class="card">
+                <div class="card-body">
+                    <h5 class="name card-title title">
+                        <%= data.comments[i].name %> 
+                    </h5> 
+                    <p class="comment card-text nParagraph">               
+                        <%= data.comments[i].comment %>  
+                    </p>
+                    <p class="card-subtitle mb-2 text-muted nParagraph">
+                        Commented At - <%= data.comments[i].createdAt.toDateString() %>
+                    </p>
+                </div>
+            </article>
+        <% } %>
+    </section>
+    <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
+        <h2>
             Leave A Comment:
         </h2>
         <form action="/summary/<%= data.id %>" method="post">
@@ -49,23 +69,4 @@
             <button class="btn btn-primary">Comment</button>
         </form>
     </section>
-    <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
-        <h2>
-            Comments:
-        </h2>
-        <% for(let i = (data.comments.length - 1); i >= 0; i--){ %>
-            <article class="card">
-                <div class="card-body">
-                    <h5 class="name card-title title">
-                        <%= data.comments[i].name %> 
-                    </h5> 
-                    <p class="comment card-text nParagraph">               
-                        <%= data.comments[i].comment %>  
-                    </p>
-                    <p class="card-subtitle mb-2 text-muted nParagraph">
-                        Commented At - <%= data.comments[i].createdAt.toDateString() %>
-                    </p>
-                </div>
-            </article>
-        <% } %>
-    </section>
+    
