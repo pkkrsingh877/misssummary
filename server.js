@@ -42,7 +42,13 @@ const summarySchema = new mongoose.Schema({
     },
     modifiedAt: {
         type: Date
-    }
+    },
+    comments: [{
+        name: { type: String, default: "anonymous" },
+        email: { type: String, default: "" },
+        comment: { type: String, default: ":)" },
+        createdAt: { type: Date, default: Date.now }
+      }]
 });
 //create model
 const Summary = new mongoose.model('Summary', summarySchema);
@@ -123,6 +129,16 @@ app.get('/admin/new', (req, res) => {
 
 app.get('/admin', (req, res) => {
     res.render('admin/index');
+});
+
+app.post('/summary/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, email, comment } = req.body;
+    const data = await Summary.findByIdAndUpdate(id, {
+        $push: { comments: [{name, email, comment }]}
+      }, { new: true, upsert: true});
+    console.log(data.comments);  
+    res.redirect(`/summary/${id}`);  
 });
 
 app.get('/summary/:id', async (req, res) => {

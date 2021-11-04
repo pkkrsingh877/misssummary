@@ -7,9 +7,9 @@
         <article class="description m-3">
             <%- data.description %>
         </article>
-        <article class="tags m-3 d-flex flex-row flex-wrap">
+        <article class="tags m-1 d-flex flex-row flex-wrap">
             <% for(let i = 0; i < data.tags.length; i++){ %>
-            <div class="card shadow p-3 mb-3 mt-3 bg-body rounded">
+            <div class="card shadow p-2 mb-3 mt-3 bg-body rounded">
                 <a href="/summary/tags/<%= data.tags[i] %>"> <%= data.tags[i] %> </a>
             </div>
             <% } %>
@@ -21,4 +21,51 @@
             <span class="bi bi-calendar icon"> <%= data.createdAt.toLocaleString() %></span>
             <span class="bi bi-book icon"> <%= data.readMinutes %> Minutes</span>
         </div>
+    </section>
+    <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
+        <h2>
+            Leave A Comment:
+        </h2>
+        <form action="/summary/<%= data.id %>" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">
+                Name:
+                </label> <br> 
+                <input type="name" name="name"
+                id="name" placeholder="name(required)" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">
+                Email:
+                </label> <br> 
+                <input type="email" name="email"
+                id="email" placeholder="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="comment" class="form-label">Comment: </label><br>
+                <textarea id ="comment" placeholder="comment(required)"
+                name="comment" cols="30" rows="3" class="form-control" required></textarea>
+            </div>
+            <button class="btn btn-primary">Comment</button>
+        </form>
+    </section>
+    <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
+        <h2>
+            Comments:
+        </h2>
+        <% for(let i = (data.comments.length - 1); i >= 0; i--){ %>
+            <article class="card">
+                <div class="card-body">
+                    <h5 class="name card-title title">
+                        <%= data.comments[i].name %> 
+                    </h5> 
+                    <p class="comment card-text nParagraph">               
+                        <%= data.comments[i].comment %>  
+                    </p>
+                    <p class="card-subtitle mb-2 text-muted nParagraph">
+                        Commented At - <%= data.comments[i].createdAt.toDateString() %>
+                    </p>
+                </div>
+            </article>
+        <% } %>
     </section>
