@@ -41,6 +41,10 @@ router.get('/tags/:tag', async (req, res) => {
     }
     const count = await Summary.find({ tags: tag}).countDocuments();
     const totalPages = Math.ceil(count/limit);
+    if(page > totalPages){
+        temp = totalPages - 1;
+        page = totalPages;
+    }
     const data = await Summary.find({ tags: tag }).skip((page - 1) * skip).limit(limit).sort({"createdAt": -1});;
     for(let i = 0; i < data.length; i++){
         let newStr = getNewDescription(data[i].description);
@@ -70,6 +74,10 @@ router.get('/', async (req, res) => {
     }
     const count = await Summary.countDocuments();
     const totalPages = Math.ceil(count/limit);
+    if(page > totalPages){
+        temp = totalPages - 1;
+        page = totalPages;
+    }
     const data = await Summary.find({}).skip((page - 1) * skip).limit(limit).sort({"createdAt": -1});
     for(let i = 0; i < data.length; i++){
         let newStr = getNewDescription(data[i].description);
