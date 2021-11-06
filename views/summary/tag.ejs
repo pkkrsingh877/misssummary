@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') %>
 
 <h1>Showing results for <%= tag %> </h1>
-<% for(let i = data.length - 1; i >= 0 ; i--){ %>
+<% for(let i = 0; i < data.length; i++){ %>
     <section class="card shadow p-3 mb-3 bg-body rounded">
         <h2>
             <a href="/summary/<%= data[i]._id %>" class="title">
@@ -22,3 +22,41 @@
         </div>
     </section>
 <% } %>
+
+<section class="d-flex flex-row justify-content-start card shadow p-3 mb-3 bg-body rounded">
+    <% if((currentPage - 1) >= 1) { %>
+        <div class="px-3 py-3">
+            <a href="/summary/tags/<%= tag %>?page=<%= currentPage - 1 %>"> Previous </a>
+        </div>
+    <% } else { %>
+        <div class="px-3 py-3">
+            <a href="#"> Previous </a>
+        </div>
+    <% } %> 
+    <% for(let i = temp; i < temp + 3; i++){ %>
+        <% if(i <= totalPages) { %>
+        <div class="px-5 py-3"> 
+            <a href="/summary/tags/<%= tag %>?page=<%= i %>"><%= i %></a> 
+        </div>
+        <% } else {%>
+            <% break; %>
+            <% } %>
+    <% } %>    
+    <% if(totalPages > 3) { %>
+        <div class="px-5 py-3"> 
+            <a href="#">...</a> 
+        </div>
+        <div class="px-5 py-3"> 
+            <a href="/summary/tags/<%= tag %>?page=<%= totalPages %>"><%= totalPages %></a> 
+        </div>
+    <% } %>
+    <% if((currentPage + 1) <= totalPages) { %>
+        <div class="px-3 py-3">
+            <a href="/summary/tags/<%= tag %>?page=<%= currentPage + 1 %>"> Next </a>
+        </div>
+    <% } else { %>
+        <div class="px-3 py-3">
+            <a href="#"> Next </a>
+        </div>
+    <% } %>    
+</section>

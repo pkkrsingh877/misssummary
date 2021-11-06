@@ -21,24 +21,61 @@ router.get('/:id', async (req, res) => {
 
 router.get('/tags/:tag', async (req, res) => {
     const { tag } = req.params;
-    const data = await Summary.find({ tags: tag });
+    let { page, skip, limit } = req.query;
+    limit = parseInt(limit);
+    page = parseInt(page);
+    skip = parseInt(skip);
+    if(!page || page < 0 ){
+        page = 1;
+    }
+    if(!skip || skip < 0){
+        skip = 4;
+    }
+    if(!limit || limit < 0){
+        limit = 4;
+    }
+    const currentPage = parseInt(page);
+    let temp = currentPage;
+    if(temp != 1){
+        temp--;
+    }
+    const count = await Summary.find({ tags: tag}).countDocuments();
+    const totalPages = Math.ceil(count/limit);
+    const data = await Summary.find({ tags: tag }).skip((page - 1) * skip).limit(limit).sort({"createdAt": -1});;
     for(let i = 0; i < data.length; i++){
         let newStr = getNewDescription(data[i].description);
         data[i].description = newStr;
     }
-    res.render('summary/tag', { data , tag });
-})
+    res.render('summary/tag', { data , tag, currentPage, totalPages, temp });
+});
 
 router.get('/', async (req, res) => {
-    const data = await Summary.find({});
-    /* Since it's a get request i'm making the 
-    description in database should not change 
-    */ 
+    let { page, skip, limit } = req.query;
+    limit = parseInt(limit);
+    page = parseInt(page);
+    skip = parseInt(skip);
+    if(!page || page < 0 ){
+        page = 1;
+    }
+    if(!skip || skip < 0){
+        skip = 4;
+    }
+    if(!limit || limit < 0){
+        limit = 4;
+    }
+    const currentPage = parseInt(page);
+    let temp = currentPage;
+    if(temp != 1){
+        temp--;
+    }
+    const count = await Summary.countDocuments();
+    const totalPages = Math.ceil(count/limit);
+    const data = await Summary.find({}).skip((page - 1) * skip).limit(limit).sort({"createdAt": -1});
     for(let i = 0; i < data.length; i++){
         let newStr = getNewDescription(data[i].description);
         data[i].description = newStr;
     }
-    res.render('summary/index', { data });
+    res.render('summary/index', { data , totalPages, currentPage, temp });
 });
 
 module.exports = router;
