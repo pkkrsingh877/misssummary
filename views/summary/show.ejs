@@ -26,7 +26,7 @@
         <h2>
             Comments:
         </h2>
-        <% for(let i = (data.comments.length - 1); i >= 0; i--){ %>
+        <% for(let i = data.comments.length - 1; i >= 0; i--){ %>
             <article class="card">
                 <div class="card-body">
                     <h5 class="name card-title title">
@@ -39,8 +39,9 @@
                         Commented At - <%= data.comments[i].createdAt.toDateString() %>
                     </p>
                 </div>
-            </article>
+            </article>  
         <% } %>
+        <button class="btn btn-primary" id="loadMoreComments">Load More Comments</button>
     </section>
     <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
         <h2>
@@ -69,4 +70,6 @@
             <button class="btn btn-primary">Comment</button>
         </form>
     </section>
+        
+    
     
