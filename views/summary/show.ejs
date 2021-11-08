@@ -9,7 +9,7 @@
         </article>
         <article class="tags m-1 d-flex flex-row flex-wrap">
             <% for(let i = 0; i < data.tags.length; i++){ %>
-            <div class="card shadow p-2 mb-3 mt-3 bg-body rounded">
+            <div class="tag-card">
                 <a href="/summary/tags/<%= data.tags[i] %>"> <%= data.tags[i] %> </a>
             </div>
             <% } %>
@@ -29,19 +29,18 @@
         <% for(let i = data.comments.length - 1; i >= 0; i--){ %>
             <article class="card">
                 <div class="card-body">
-                    <h5 class="name card-title title">
+                    <h5 class="name card-title comments-name">
                         <%= data.comments[i].name %> 
                     </h5> 
-                    <p class="comment card-text nParagraph">               
+                    <p class="comment card-text comments-comment">               
                         <%= data.comments[i].comment %>  
                     </p>
-                    <p class="card-subtitle mb-2 text-muted nParagraph">
-                        Commented At - <%= data.comments[i].createdAt.toDateString() %>
+                    <p class="card-subtitle mb-2 comments-date">
+                        <%= data.comments[i].createdAt.toDateString() %>
                     </p>
                 </div>
             </article>  
         <% } %>
-        <button class="btn btn-primary" id="loadMoreComments">Load More Comments</button>
     </section>
     <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
         <h2>
