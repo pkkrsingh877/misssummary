@@ -11,12 +11,17 @@
                 <%- data[i].description %>
                  <a href="/summary/<%= data[i]._id %>">[Read More...]</a>
             </article>
-            <div class="icons">
-                <span class="bi bi-person icon"> Prabhat Kumar</span>
-                <span class="bi bi-ui-checks-grid icon"> Category</span>
-                <span class="bi bi-clock icon"> <%= data[i].modifiedAt.toLocaleString() %></span>
-                <span class="bi bi-calendar icon"> <%= data[i].createdAt.toLocaleString() %></span>
-                <span class="bi bi-book icon"> <%= data[i].readMinutes %> Minutes</span>
+            <hr>
+            <div class="description text-muted container cardFooter">
+                <div class="row">
+                    <div class="col-sm">Modified at <%= data[i].modifiedAt.toDateString() %></div>
+                    <div class="col-sm">Created at <%= data[i].createdAt.toDateString() %></div>
+                    <% if (data[i].readMinutes > 1) { %>
+                        <div class="col-sm"> <%= data[i].readMinutes %> minutes read</div>
+                    <% } else { %>
+                        <div class="col-sm"> <%= data[i].readMinutes %> minute read</div>
+                    <% } %>
+                </div>
             </div>
         </section>
     <% } %>

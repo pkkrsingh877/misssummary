@@ -14,13 +14,18 @@
             </div>
             <% } %>
         </article>
-        <div class="icons">
-            <span class="bi bi-person icon"> Prabhat Kumar</span>
-            <span class="bi bi-ui-checks-grid icon"> Category</span>
-            <span class="bi bi-clock icon"> <%= data.modifiedAt.toLocaleString() %></span>
-            <span class="bi bi-calendar icon"> <%= data.createdAt.toLocaleString() %></span>
-            <span class="bi bi-book icon"> <%= data.readMinutes %> Minutes</span>
-        </div>
+        <hr>
+            <div class="description text-muted container cardFooter">
+                <div class="row">
+                    <div class="col-sm">Modified at <%= data.modifiedAt.toDateString() %></div>
+                    <div class="col-sm">Created at <%= data.createdAt.toDateString() %></div>
+                    <% if (data.readMinutes > 1) { %>
+                        <div class="col-sm"> <%= data.readMinutes %> minutes read</div>
+                    <% } else { %>
+                        <div class="col-sm"> <%= data.readMinutes %> minute read</div>
+                    <% } %>
+                </div>
+            </div>
     </section>
     <section class="card shadow p-3 mb-3 mt-3 bg-body rounded">
         <h2>
